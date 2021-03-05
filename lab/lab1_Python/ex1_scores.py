@@ -1,4 +1,11 @@
+# Competition with athletes
+# DB record format:
+# Donald Duck ITA 9.3 8.9 9.7 9.7 9.8   => Name Surname Country [votes]
+# Compute 3 best athletes with the sum of marks removing the worst and the best ones.
+# Compute the best Country with the sum of their athletes marks.
+
 import sys
+
 
 # Describe the competitor
 class Competitor():

@@ -49,161 +49,72 @@ petal_w_2 = attr[3,M2]
 
 ### Pairs of values with scatter plots
 
+def histogram(f0, f1, f2, label, classes, b=10, d=True, a=1, edgec="black"):
+    fig, ax = plt.subplots()
+    ax.hist(f0, bins=b, density=d, label=classes[0], alpha=a, edgecolor=edgec)
+    ax.hist(f1, bins=b, density=d, label=classes[50], alpha=a, edgecolor=edgec)
+    ax.hist(f2, bins=b, density=d, label=classes[100], alpha=a, edgecolor=edgec)
+    ax.set_xlabel(label)
+    ax.legend()
+    plt.show()
+
+def scatter(f0, f1, f2, s0, s1, s2, xlabel, ylabel, classes):
+    ig, ax = plt.subplots()
+    ax.scatter(f0, s0, label=classes[0])
+    ax.scatter(f1, s1, label=classes[50])
+    ax.scatter(f2, s2, label=classes[100])
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.legend()
+    plt.show()
+
 # Just Sepal length
-fig, ax = plt.subplots()
-ax.hist(sepal_l_0, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(sepal_l_1, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(sepal_l_2, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Sepal length")
-ax.legend()
-plt.show()
+histogram(sepal_l_0, sepal_l_1, sepal_l_2, "Sepal length", classes, a=0.5)
 
 # Sepal length x Sepal width
-ig, ax = plt.subplots()
-ax.scatter(sepal_l_0, sepal_w_0, label=classes[0])
-ax.scatter(sepal_l_1, sepal_w_1, label=classes[50])
-ax.scatter(sepal_l_2, sepal_w_2, label=classes[100])
-ax.set_xlabel("Sepal length")
-ax.set_ylabel("Sepal width")
-ax.legend()
-plt.show()
+scatter(sepal_l_0, sepal_l_1, sepal_l_2, sepal_w_0, sepal_w_1, sepal_w_2, "Sepal length", "Sepal width", classes)
 
 # Sepal length x Petal length
-ig, ax = plt.subplots()
-ax.scatter(sepal_l_0, petal_l_0, label=classes[0])
-ax.scatter(sepal_l_1, petal_l_1, label=classes[50])
-ax.scatter(sepal_l_2, petal_l_2, label=classes[100])
-ax.set_xlabel("Sepal length")
-ax.set_ylabel("Petal length")
-ax.legend()
-plt.show()
+scatter(sepal_l_0, sepal_l_1, sepal_l_2, petal_l_0, petal_l_1, petal_l_2, "Sepal length", "Petal length", classes)
 
 # Sepal length x Petal width
-ig, ax = plt.subplots()
-ax.scatter(sepal_l_0, petal_w_0, label=classes[0])
-ax.scatter(sepal_l_1, petal_w_1, label=classes[50])
-ax.scatter(sepal_l_2, petal_w_2, label=classes[100])
-ax.set_xlabel("Sepal length")
-ax.set_ylabel("Petal width")
-ax.legend()
-plt.show()
+scatter(sepal_l_0, sepal_l_1, sepal_l_2, petal_w_0, petal_w_1, petal_w_2, "Sepal length", "Petal width", classes)
 
 # Sepal width x Sepal length
-ig, ax = plt.subplots()
-ax.scatter(sepal_w_0, sepal_l_0, label=classes[0])
-ax.scatter(sepal_w_1, sepal_l_1, label=classes[50])
-ax.scatter(sepal_w_2, sepal_l_2, label=classes[100])
-ax.set_xlabel("Sepal width")
-ax.set_ylabel("Sepal length")
-ax.legend()
-plt.show()
+scatter(sepal_w_0, sepal_w_1, sepal_w_2, sepal_l_0, sepal_l_1, sepal_l_2, "Sepal width", "Sepal length", classes)
 
 # Just Sepal width
-fig, ax = plt.subplots()
-ax.hist(sepal_w_0, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(sepal_w_1, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(sepal_w_2, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Sepal width")
-ax.legend()
-plt.show()
+histogram(sepal_w_0, sepal_w_1, sepal_w_2, "Sepal width", classes, a=0.5)
 
 # Sepal width x Petal length
-ig, ax = plt.subplots()
-ax.scatter(sepal_w_0, petal_l_0, label=classes[0])
-ax.scatter(sepal_w_1, petal_l_1, label=classes[50])
-ax.scatter(sepal_w_2, petal_l_2, label=classes[100])
-ax.set_xlabel("Sepal width")
-ax.set_ylabel("Petal length")
-ax.legend()
-plt.show()
+scatter(sepal_w_0, sepal_w_1, sepal_w_2, petal_l_0, petal_l_1, petal_l_2, "Sepal width", "Petal length", classes)
 
 # Sepal width x Petal width
-ig, ax = plt.subplots()
-ax.scatter(sepal_w_0, petal_w_0, label=classes[0])
-ax.scatter(sepal_w_1, petal_w_1, label=classes[50])
-ax.scatter(sepal_w_2, petal_w_2, label=classes[100])
-ax.set_xlabel("Sepal width")
-ax.set_ylabel("Petal width")
-ax.legend()
-plt.show()
+scatter(sepal_w_0, sepal_w_1, sepal_w_2, petal_w_0, petal_w_1, petal_w_2, "Sepal width", "Sepal width", classes)
 
 # Petal length x Sepal length
-ig, ax = plt.subplots()
-ax.scatter(petal_l_0, sepal_l_0, label=classes[0])
-ax.scatter(petal_l_1, sepal_l_1, label=classes[50])
-ax.scatter(petal_l_2, sepal_l_2, label=classes[100])
-ax.set_xlabel("Petal length")
-ax.set_ylabel("Sepal length")
-ax.legend()
-plt.show()
+scatter(petal_l_0, petal_l_1, petal_l_2, sepal_l_0, sepal_l_1, sepal_l_2, "Petal length", "Sepal length", classes)
 
 # Petal length x Sepal width
-ig, ax = plt.subplots()
-ax.scatter(petal_l_0, sepal_w_0, label=classes[0])
-ax.scatter(petal_l_1, sepal_w_1, label=classes[50])
-ax.scatter(petal_l_2, sepal_w_2, label=classes[100])
-ax.set_xlabel("Petal length")
-ax.set_ylabel("Sepal width")
-ax.legend()
-plt.show()
+scatter(petal_l_0, petal_l_1, petal_l_2, sepal_w_0, sepal_w_1, sepal_w_2, "Petal length", "Sepal width", classes)
 
 # Just Petal length
-fig, ax = plt.subplots()
-ax.hist(petal_l_0, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(petal_l_1, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(petal_l_2, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Petal length")
-ax.legend()
-plt.show()
+histogram(petal_l_0, petal_l_1, petal_l_2, "Petal length", classes, a=0.5)
 
 # Petal length x Petal width
-ig, ax = plt.subplots()
-ax.scatter(petal_l_0, petal_w_0, label=classes[0])
-ax.scatter(petal_l_1, petal_w_1, label=classes[50])
-ax.scatter(petal_l_2, petal_w_2, label=classes[100])
-ax.set_xlabel("Petal length")
-ax.set_ylabel("Petal width")
-ax.legend()
-plt.show()
+scatter(petal_l_0, petal_l_1, petal_l_2, petal_w_0, petal_w_1, petal_w_2, "Petal length", "Petal width", classes)
 
 # Petal width x Sepal length
-ig, ax = plt.subplots()
-ax.scatter(petal_w_0, sepal_l_0, label=classes[0])
-ax.scatter(petal_w_1, sepal_l_1, label=classes[50])
-ax.scatter(petal_w_2, sepal_l_2, label=classes[100])
-ax.set_xlabel("Petal width")
-ax.set_ylabel("Sepal length")
-ax.legend()
-plt.show()
+scatter(petal_w_0, petal_w_1, petal_w_2, sepal_l_0, sepal_l_1, sepal_l_2, "Petal width", "Sepal length", classes)
 
 # Petal width x Sepal width
-ig, ax = plt.subplots()
-ax.scatter(petal_w_0, sepal_w_0, label=classes[0])
-ax.scatter(petal_w_1, sepal_w_1, label=classes[50])
-ax.scatter(petal_w_2, sepal_w_2, label=classes[100])
-ax.set_xlabel("Petal width")
-ax.set_ylabel("Sepal width")
-ax.legend()
-plt.show()
+scatter(petal_w_0, petal_w_1, petal_w_2, sepal_w_0, sepal_w_1, sepal_w_2, "Petal width", "Sepal width", classes)
 
 # Petal width x Petal length
-ig, ax = plt.subplots()
-ax.scatter(petal_w_0, petal_l_0, label=classes[0])
-ax.scatter(petal_w_1, petal_l_1, label=classes[50])
-ax.scatter(petal_w_2, petal_l_2, label=classes[100])
-ax.set_xlabel("Petal width")
-ax.set_ylabel("Petal length")
-ax.legend()
-plt.show()
+scatter(petal_w_0, petal_w_1, petal_w_2, petal_l_0, petal_l_1, petal_l_2, "Petal width", "Petal length", classes)
 
 # Just Petal width
-fig, ax = plt.subplots()
-ax.hist(petal_w_0, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(petal_w_1, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(petal_w_2, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Petal width")
-ax.legend()
-plt.show()
+histogram(petal_w_0, petal_w_1, petal_w_2, "Petal width", classes, a=0.5)
 
 
 # Statistics
@@ -232,40 +143,10 @@ petal_w_1_c = DC[3, M1]
 petal_w_2_c = DC[3, M2]
 
 # Plotting the centered data:
-print("\nPlotting the centered data...")
+print("\nPlotting the centered data... (Just 1 hist and 1 scatter)")
 
 # Just Sepal length centered
-fig, ax = plt.subplots()
-ax.hist(sepal_l_0_c, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(sepal_l_1_c, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(sepal_l_2_c, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Sepal length centered")
-ax.legend()
-plt.show()
+histogram(sepal_l_0_c, sepal_l_1_c, sepal_l_2_c, "Sepal length centered", classes, a=0.5)
 
-# Just Sepal width centered
-fig, ax = plt.subplots()
-ax.hist(sepal_w_0_c, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(sepal_w_1_c, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(sepal_w_2_c, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Sepal width centered")
-ax.legend()
-plt.show()
-
-# Just Petal length centered
-fig, ax = plt.subplots()
-ax.hist(petal_l_0_c, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(petal_l_1_c, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(petal_l_2_c, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Petal length centered")
-ax.legend()
-plt.show()
-
-# Just Petal width centered
-fig, ax = plt.subplots()
-ax.hist(petal_w_0_c, bins=10, density=True, label=classes[0], alpha=0.5, edgecolor="black")
-ax.hist(petal_w_1_c, bins=10, density=True, label=classes[50], alpha=0.5, edgecolor="black")
-ax.hist(petal_w_2_c, bins=10, density=True, label=classes[100], alpha=0.5, edgecolor="black")
-ax.set_xlabel("Petal width centered")
-ax.legend()
-plt.show()
+# Sepal length x Sepal width
+scatter(sepal_l_0_c, sepal_l_1_c, sepal_l_2_c, sepal_w_0_c, sepal_w_1_c, sepal_w_2_c, "Sepal length", "Sepal width", classes)

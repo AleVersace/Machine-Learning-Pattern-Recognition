@@ -47,8 +47,7 @@ petal_w_1 = attr[3,M1]
 petal_w_2 = attr[3,M2]
 
 
-### Pairs of values with scatter plots
-
+### Pairs of values with scatter plots, sigle feature with histograms
 def histogram(f0, f1, f2, label, classes, b=10, d=True, a=1, edgec="black"):
     fig, ax = plt.subplots()
     ax.hist(f0, bins=b, density=d, label=classes[0], alpha=a, edgecolor=edgec)

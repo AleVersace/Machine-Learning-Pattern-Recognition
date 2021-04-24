@@ -6,15 +6,15 @@ import scipy.special
 
 # Create a set with word contained at least once in the 3 training set classes (union of words)
 def unionWords(lInf_train, lPur_train, lPar_train):
-    commW = set()
+    commW = set([])
     for tercet in lInf_train:
-        for w in tercet.split(" "):
+        for w in tercet.split():
             commW.add(w)
     for tercet in lPur_train:
-        for w in tercet.split(" "):
+        for w in tercet.split():
             commW.add(w)
     for tercet in lPar_train:
-        for w in tercet.split(" "):
+        for w in tercet.split():
             commW.add(w)
     return commW
 
@@ -26,28 +26,27 @@ def dictOccurrencies(D, words, eps):
         d[w] = eps 
     
     for tercets in D:   # update occurrency based on class word occurrency
-        for w in tercets.split(" "):
+        for w in tercets.split():
             if w in d.keys():
                 d[w] += 1
-            else:
-                d[w] = eps + 1
     return d
 
 # Compute each cantica ML parameters = (#Occ of word j in class C) / (Total words in class C)
 def mlParameters(d):
-    mlParams = {i[0]: (np.log(i[1]) - np.log(sum(d.values()))) for i in d.items()}
+    lNc = np.log(sum(d.values()))
+    mlParams = {w[0]: (np.log(w[1]) - lNc) for w in d.items()}
     return mlParams
 
 # Compute evaluation on D list of tercets
 def evalDictOccurrencies(mlP1, mlP2, mlP3, D, eps, label):
     d = {}
-    i = 0
+    S = np.array([])
     for tercet in D:   # for each tercet evaluate
-        for w in tercet.split(" "):
+        for w in tercet.split():
             if w in d.keys():
                 d[w] += 1
             else:
-                d[w] = eps + 1
+                d[w] = 1
         
         # class-conditionals on a single tercet
         Sp1 = []
@@ -67,10 +66,10 @@ def evalDictOccurrencies(mlP1, mlP2, mlP3, D, eps, label):
         Sp3 = sum(Sp3)
         St = np.vstack((Sp1, Sp2, Sp3))
 
-        if i == 0:
+        if S.shape[0] == 0:
             S = St
-            i = 1
-        S = np.hstack((S, St))
+        else:
+            S = np.hstack((S, St))
     return S
 
 # Evaluate tercets based on 3 classes (3 cantiche)
@@ -82,7 +81,7 @@ def evalTercets3(mlP1, mlP2, mlP3, eval, eps, label):
     ##
 
     logS = logS + np.log(1/3)
-    logSPost = logS - scipy.special.logsumexp(logS, axis = 0)
+    logSPost = logS - scipy.special.logsumexp(logS, axis=0)
     logSPost = np.exp(logSPost)
     lPredicted = logSPost.argmax(axis=0)
     print(lPredicted.shape)
@@ -107,7 +106,7 @@ if __name__=='__main__':
     lPar_train, lPar_evaluation = split_data(lPar, 4)
 
     words = unionWords(lInf_train, lPur_train, lPar_train)
-
+    
     # compute words occurrencies (dicts)
     dInf = dictOccurrencies(lInf_train, words, eps)
     dPur = dictOccurrencies(lPur_train, words, eps)
@@ -117,6 +116,8 @@ if __name__=='__main__':
     mlInf = mlParameters(dInf)
     mlPur = mlParameters(dPur)
     mlPar = mlParameters(dPar)
+
+# ----
 
     # Evaluate sets
     S = evalTercets3(mlInf, mlPur, mlPar, lInf_evaluation, eps, label[0])

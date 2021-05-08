@@ -66,11 +66,15 @@ def ROCcurve(x, y):
 
 """
 Compute the minimum detection costs for 4 different application (prior, cfn, cfp) using an optimal threshold computation over increasing order scores.
-Computes also ROC curves.
+Computes and plots also ROC curves.
+@param name: string actual name of the recognizer (in this case represents the eps used during the training phase in the categorical model)
+@param llr_f: string of the numpy file containing log-likelihood ratios of evaluation set
+@param labels_f: string of the numpy file containing actual labels of evaluation set
 """
-if __name__ == '__main__':
-    llr = np.load('data/commedia_llr_infpar.npy')
-    labels = np.load('data/commedia_labels_infpar.npy')
+def recognizerEvaluator(name, llr_f, labels_f):
+    print('\n' + name)
+    llr = np.load(llr_f)
+    labels = np.load(labels_f)
     scores = llr.copy()
     scores.sort()
 
@@ -132,3 +136,11 @@ if __name__ == '__main__':
     ROCcurve(ROCx3, ROCy3)
     print("\n{}: {}".format(t4, min4))
     ROCcurve(ROCx4, ROCy4)
+
+"""
+Compares different system application of the Inferno-Paradiso tercets binary task classifier
+using first eps = 0.001 and then the optimal eps = 1.
+"""
+if __name__ == '__main__':
+    recognizerEvaluator("Inferno vs Paradiso eps = 0.001", "data/commedia_llr_infpar.npy", "data/commedia_labels_infpar.npy")
+    recognizerEvaluator("Inferno vs Paradiso eps = 1", "data/commedia_llr_infpar_eps1.npy", "data/commedia_labels_infpar.npy")
